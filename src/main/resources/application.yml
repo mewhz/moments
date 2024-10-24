@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /apis
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/moments?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+springdoc:
+  default-flat-param-object: true # Springdoc 会将对象的属性作为单独的参数列出
+
+knife4j:
+  enable: true

@@ -1,7 +1,11 @@
 package com.mewhz.moments;
 
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.signers.JWTSignerUtil;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 public class Main {
 
@@ -34,6 +38,18 @@ public class Main {
                 .sign();
 
         System.out.println("token = " + token);
+
+    }
+
+    @Test
+    public void arrayUtilTest() {
+
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        arrayList.add("/upload/866ab02db7ee484599549ab2f2896350");
+        arrayList.add("/upload/0e80f608e80c45cf85674aecb4ced7f6");
+
+        System.out.println("ArrayUtil.toString(arrayList) = " + ArrayUtil.toString(arrayList));
 
     }
 

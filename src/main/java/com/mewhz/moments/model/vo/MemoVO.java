@@ -1,13 +1,11 @@
 package com.mewhz.moments.model.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.mewhz.moments.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,8 +14,16 @@ import java.util.List;
 @AllArgsConstructor
 public class MemoVO {
 
+    private Integer id;
     private String content;
-    private List<String> imgs;
+    private String imgs;
+    private Integer favCount;
+    private Integer commentCount;
+    private Integer userId;
+    private String createdAt;
+    private String updatedAt;
     private String showType;
+
+    private User user;
 
 }

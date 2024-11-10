@@ -77,4 +77,30 @@ public class MemoServiceImpl extends ServiceImpl<MemoMapper, Memo> implements Me
         return memoMapper.updateById(new Memo().setId(id).setIsDelete(1)) > 0;
 
     }
+
+    @Override
+    public MemoVO getMemo(Integer id) {
+
+        Memo memo = memoMapper.selectById(id);
+
+        MemoVO memoVO = new MemoVO();
+
+        BeanUtil.copyProperties(memo, memoVO);
+
+        memoVO.setUser(userMapper.selectById(memo.getUserId()));
+
+        return memoVO;
+    }
+
+    @Override
+    public boolean likeMemo(Integer id) {
+
+        Memo memo = memoMapper.selectById(id);
+
+        if (memo != null && memo.getIsDelete() == 0) memo.setFavCount(memo.getFavCount() + 1);
+
+        return memoMapper.updateById(memo) > 0;
+    }
+
+
 }

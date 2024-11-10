@@ -27,8 +27,18 @@ public class MemoController {
     }
 
     @PostMapping("/remove")
-    public ResultVO<?> remove(@RequestParam Integer id) {
+    public ResultVO<?> remove(@RequestParam("id") Integer id) {
         return ResultVO.success(memoService.removeMemo(id));
+    }
+
+    @PostMapping("/get")
+    public ResultVO<?> get(@RequestParam("id") Integer id) {
+        return ResultVO.success(memoService.getMemo(id));
+    }
+
+    @PostMapping("/like")
+    public ResultVO<?> like(@RequestParam("id") Integer id) {
+        return ResultVO.success(memoService.likeMemo(id));
     }
 
 }

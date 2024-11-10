@@ -23,5 +23,10 @@ public class User {
 
     private String nickname;
 
+    private String avatarUrl;
+    private String coverUrl;
+    private String slogan;
+
+
 
 }

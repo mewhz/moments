@@ -15,4 +15,8 @@ public interface MemoService extends IService<Memo> {
 
     boolean removeMemo(Integer id);
 
+    MemoVO getMemo(Integer id);
+
+    boolean likeMemo(Integer id);
+
 }

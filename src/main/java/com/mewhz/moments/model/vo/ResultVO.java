@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import static com.mewhz.moments.enums.StatusCodeEnum.*;
+import static com.mewhz.moments.enums.StatusCodeEnum.FAIL;
+import static com.mewhz.moments.enums.StatusCodeEnum.SUCCESS;
 
 
 @Data

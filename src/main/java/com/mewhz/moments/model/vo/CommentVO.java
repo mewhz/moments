@@ -1,31 +1,23 @@
 package com.mewhz.moments.model.vo;
 
-import com.mewhz.moments.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.List;
-
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemoVO {
+public class CommentVO {
 
     private Integer id;
     private String content;
-    private String imgs;
-    private Integer favCount;
-    private Integer commentCount;
-    private Integer userId;
+    private String username;
+    private String website;
+    private Integer memoId;
+    private Integer authorId;
     private String createdAt;
     private String updatedAt;
-    private String showType;
-
-    private User user;
-
-    private List<CommentVO> comments;
 
 }

@@ -8,23 +8,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-@TableName("memo")
 @Data
 @Accessors(chain = true)
-@NoArgsConstructor
 @AllArgsConstructor
-public class Memo {
+@NoArgsConstructor
+@TableName("comment")
+public class Comment {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String content;
-    private String imgs;
-    private Integer favCount;
-    private Integer commentCount;
-    private Integer userId;
+    private String username;
+    private String website;
+    private Integer memoId;
+    private Integer authorId;
     private String createdAt;
     private String updatedAt;
-    private String showType;
     private Integer isDelete;
 
 }

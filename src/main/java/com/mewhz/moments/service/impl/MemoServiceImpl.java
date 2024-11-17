@@ -2,18 +2,16 @@ package com.mewhz.moments.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mewhz.moments.mapper.CommentMapper;
 import com.mewhz.moments.mapper.MemoMapper;
 import com.mewhz.moments.mapper.UserMapper;
 import com.mewhz.moments.model.dto.MemoDTO;
 import com.mewhz.moments.model.dto.MemoListDTO;
+import com.mewhz.moments.model.entity.Comment;
 import com.mewhz.moments.model.entity.Memo;
-import com.mewhz.moments.model.entity.User;
+import com.mewhz.moments.model.vo.CommentVO;
 import com.mewhz.moments.model.vo.MemoListVO;
 import com.mewhz.moments.model.vo.MemoVO;
 import com.mewhz.moments.service.MemoService;
@@ -30,6 +28,8 @@ public class MemoServiceImpl extends ServiceImpl<MemoMapper, Memo> implements Me
     private final MemoMapper memoMapper;
 
     private final UserMapper userMapper;
+
+    private final CommentMapper commentMapper;
 
     @Override
     public boolean saveMemo(MemoDTO memoDTO) {
@@ -64,7 +64,12 @@ public class MemoServiceImpl extends ServiceImpl<MemoMapper, Memo> implements Me
 
         page.getRecords().forEach(memo ->
                 list.add(BeanUtil.copyProperties(memo, MemoVO.class)
-                        .setUser(userMapper.selectById(memo.getUserId()))));
+                        .setUser(userMapper.selectById(memo.getUserId()))
+                        .setComments(BeanUtil.copyToList(commentMapper
+                                .selectList(new LambdaQueryWrapper<Comment>()
+                                        .eq(Comment::getMemoId, memo.getId())
+                                        .eq(Comment::getIsDelete, 0)),
+                                CommentVO.class))));
 
         result.setList(list);
 
@@ -88,6 +93,12 @@ public class MemoServiceImpl extends ServiceImpl<MemoMapper, Memo> implements Me
         BeanUtil.copyProperties(memo, memoVO);
 
         memoVO.setUser(userMapper.selectById(memo.getUserId()));
+
+        memoVO.setComments(BeanUtil.copyToList(commentMapper
+                .selectList(new LambdaQueryWrapper<Comment>()
+                        .eq(Comment::getMemoId, id)
+                        .eq(Comment::getIsDelete, 0)),
+                CommentVO.class));
 
         return memoVO;
     }

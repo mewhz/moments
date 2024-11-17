@@ -2,8 +2,6 @@ package com.mewhz.moments.controller;
 
 import com.mewhz.moments.model.dto.MemoDTO;
 import com.mewhz.moments.model.dto.MemoListDTO;
-import com.mewhz.moments.model.entity.Memo;
-import com.mewhz.moments.model.vo.MemoVO;
 import com.mewhz.moments.model.vo.ResultVO;
 import com.mewhz.moments.service.MemoService;
 import lombok.RequiredArgsConstructor;

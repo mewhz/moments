@@ -1,6 +1,5 @@
 package com.mewhz.moments.model.vo;
 
-import com.mewhz.moments.model.entity.Memo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

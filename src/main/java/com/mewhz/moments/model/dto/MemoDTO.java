@@ -13,8 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 public class MemoDTO {
 
+    private Integer id;
     private String content;
     private List<String> imgs;
-    private String showType;
+    private Integer pinned;
+    private Integer showType;
 
 }

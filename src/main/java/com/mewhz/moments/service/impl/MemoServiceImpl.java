@@ -2,6 +2,7 @@ package com.mewhz.moments.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mewhz.moments.mapper.CommentMapper;
@@ -15,6 +16,7 @@ import com.mewhz.moments.model.vo.CommentVO;
 import com.mewhz.moments.model.vo.MemoListVO;
 import com.mewhz.moments.model.vo.MemoVO;
 import com.mewhz.moments.service.MemoService;
+import com.mewhz.moments.util.UserIdTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,13 +36,13 @@ public class MemoServiceImpl extends ServiceImpl<MemoMapper, Memo> implements Me
     @Override
     public boolean saveMemo(MemoDTO memoDTO) {
 
-        Memo memo = new Memo();
+        Memo memo = BeanUtil.copyProperties(memoDTO, Memo.class);
 
-        memo.setContent(memoDTO.getContent());
+        memo.setUserId(UserIdTokenUtil.getUserId());
+
         memo.setImgs(memoDTO.getImgs().toString().replace("[", "").replace("]", ""));
-        memo.setShowType(memoDTO.getShowType());
 
-        return memoMapper.insert(memo) > 0;
+        return this.saveOrUpdate(memo);
 
     }
 
@@ -49,11 +51,15 @@ public class MemoServiceImpl extends ServiceImpl<MemoMapper, Memo> implements Me
 
         Page<Memo> page = new Page<>(memoListDTO.getPage(), memoListDTO.getSize());
 
-        page = memoMapper.selectPage(page,
-                new LambdaQueryWrapper<Memo>()
-                        .orderByDesc(Memo::getCreatedAt)
-                        .eq(Memo::getShowType, 1)
-                        .eq(Memo::getIsDelete, 0));
+        LambdaQueryWrapper<Memo> memoQueryWrapper = new LambdaQueryWrapper<>();
+
+        memoQueryWrapper.orderByDesc(Memo::getCreatedAt).eq(Memo::getIsDelete, 0);
+
+        System.out.println("UserIdTokenUtil.getUserId() = " + UserIdTokenUtil.getUserId());
+
+        if (UserIdTokenUtil.getUserId() == null) memoQueryWrapper.eq(Memo::getShowType, 1);
+
+        page = memoMapper.selectPage(page, memoQueryWrapper);
 
         MemoListVO result = new MemoListVO();
 

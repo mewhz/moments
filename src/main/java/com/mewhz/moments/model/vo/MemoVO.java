@@ -22,7 +22,8 @@ public class MemoVO {
     private Integer userId;
     private String createdAt;
     private String updatedAt;
-    private String showType;
+    private Integer pinned;
+    private Integer showType;
 
     private User user;
 

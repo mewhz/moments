@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static com.mewhz.moments.constant.CommonConstant.KEY;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -44,12 +46,15 @@ public class Main {
     @Test
     public void arrayUtilTest() {
 
-        ArrayList<String> arrayList = new ArrayList<>();
+        byte[] key = KEY.getBytes();
 
-        arrayList.add("/upload/866ab02db7ee484599549ab2f2896350");
-        arrayList.add("/upload/0e80f608e80c45cf85674aecb4ced7f6");
-
-        System.out.println("ArrayUtil.toString(arrayList) = " + ArrayUtil.toString(arrayList));
+        String token = JWT.create()
+                .setPayload("userId", 1)
+                .setPayload("username", "admin")
+                .setHeader("alg", "HS256")
+                .setHeader("typ", "JWT")
+                .setKey(key)
+                .sign();
 
     }
 

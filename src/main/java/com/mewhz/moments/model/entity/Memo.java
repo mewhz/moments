@@ -24,7 +24,8 @@ public class Memo {
     private Integer userId;
     private String createdAt;
     private String updatedAt;
-    private String showType;
+    private Integer pinned;
+    private Integer showType;
     private Integer isDelete;
 
 }

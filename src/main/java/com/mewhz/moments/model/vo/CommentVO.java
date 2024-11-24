@@ -16,7 +16,8 @@ public class CommentVO {
     private String username;
     private String website;
     private Integer memoId;
-    private Integer authorId;
+    private Integer author;
+    private String replyTo;
     private String createdAt;
     private String updatedAt;
 

@@ -19,4 +19,6 @@ public interface MemoService extends IService<Memo> {
 
     boolean likeMemo(Integer id);
 
+    boolean setupPinned(Integer id);
+
 }

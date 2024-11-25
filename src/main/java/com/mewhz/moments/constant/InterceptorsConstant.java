@@ -11,7 +11,6 @@ public interface InterceptorsConstant {
 
             "/user/login",
 
-//            "/memo/list",
             "/memo/get",
             "/memo/like",
     };

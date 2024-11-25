@@ -39,4 +39,9 @@ public class MemoController {
         return ResultVO.success(memoService.likeMemo(id));
     }
 
+    @PostMapping("/setPinned")
+    public ResultVO<?> setPinned(@RequestParam("id") Integer id) {
+        return ResultVO.success(memoService.setupPinned(id));
+    }
+
 }

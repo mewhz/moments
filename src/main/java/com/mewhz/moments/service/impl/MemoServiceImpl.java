@@ -3,6 +3,7 @@ package com.mewhz.moments.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mewhz.moments.mapper.CommentMapper;
@@ -53,9 +54,10 @@ public class MemoServiceImpl extends ServiceImpl<MemoMapper, Memo> implements Me
 
         LambdaQueryWrapper<Memo> memoQueryWrapper = new LambdaQueryWrapper<>();
 
-        memoQueryWrapper.orderByDesc(Memo::getCreatedAt).eq(Memo::getIsDelete, 0);
-
-        System.out.println("UserIdTokenUtil.getUserId() = " + UserIdTokenUtil.getUserId());
+        memoQueryWrapper
+                .orderByDesc(Memo::getPinned)
+                .orderByDesc(Memo::getCreatedAt)
+                .eq(Memo::getIsDelete, 0);
 
         if (UserIdTokenUtil.getUserId() == null) memoQueryWrapper.eq(Memo::getShowType, 1);
 
@@ -115,6 +117,19 @@ public class MemoServiceImpl extends ServiceImpl<MemoMapper, Memo> implements Me
         Memo memo = memoMapper.selectById(id);
 
         if (memo != null && memo.getIsDelete() == 0) memo.setFavCount(memo.getFavCount() + 1);
+
+        return memoMapper.updateById(memo) > 0;
+    }
+
+    @Override
+    public boolean setupPinned(Integer id) {
+
+        // 所有 memo 的 pinned 设置为 0
+        memoMapper.update(new Memo().setPinned(0), new LambdaUpdateWrapper<Memo>().eq(Memo::getPinned, 1));
+
+        Memo memo = memoMapper.selectById(id);
+
+        memo.setPinned(memo.getPinned() == 1 ? 0 : 1);
 
         return memoMapper.updateById(memo) > 0;
     }

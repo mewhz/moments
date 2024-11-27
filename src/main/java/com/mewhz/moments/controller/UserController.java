@@ -22,4 +22,14 @@ public class UserController {
         return ResultVO.success(userService.login(user.getUsername(), user.getPassword()));
     }
 
+    @PostMapping("/profile")
+    public ResultVO<?> profile() {
+        return ResultVO.success(userService.getUserInfo());
+    }
+
+    @PostMapping("/saveProfile")
+    public ResultVO<?> saveProfile(@RequestBody User user) {
+        return ResultVO.success(userService.saveUser(user));
+    }
+
 }

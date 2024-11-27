@@ -1,4 +1,4 @@
-package com.mewhz.moments.model.vo;
+package com.mewhz.moments.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserLoginVO {
+public class UserLoginDTO {
 
     private Integer id;
     private String token;

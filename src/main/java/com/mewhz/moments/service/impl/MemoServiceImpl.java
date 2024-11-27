@@ -124,10 +124,10 @@ public class MemoServiceImpl extends ServiceImpl<MemoMapper, Memo> implements Me
     @Override
     public boolean setupPinned(Integer id) {
 
+        Memo memo = memoMapper.selectById(id);
+
         // 所有 memo 的 pinned 设置为 0
         memoMapper.update(new Memo().setPinned(0), new LambdaUpdateWrapper<Memo>().eq(Memo::getPinned, 1));
-
-        Memo memo = memoMapper.selectById(id);
 
         memo.setPinned(memo.getPinned() == 1 ? 0 : 1);
 

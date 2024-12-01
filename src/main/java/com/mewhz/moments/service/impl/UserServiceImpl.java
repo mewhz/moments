@@ -61,6 +61,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         Integer userId = UserIdTokenUtil.getUserId();
 
+        if (userId == null) userId = 1;
+
         User user = userMapper.selectById(userId);
 
         return BeanUtil.copyProperties(user, UserVO.class);

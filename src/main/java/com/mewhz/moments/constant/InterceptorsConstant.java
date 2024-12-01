@@ -13,10 +13,15 @@ public interface InterceptorsConstant {
 
             "/memo/get",
             "/memo/like",
+
+            "/sysConfig/get",
     };
 
     String[] ALLOW_PATHS = {
             "/memo/list",
-            "/comment/add"
+
+            "/comment/add",
+
+            "/user/profile"
     };
 }

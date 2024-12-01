@@ -1,6 +1,7 @@
 package com.mewhz.moments.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -59,7 +60,13 @@ public class MemoServiceImpl extends ServiceImpl<MemoMapper, Memo> implements Me
                 .orderByDesc(Memo::getCreatedAt)
                 .eq(Memo::getIsDelete, 0);
 
-        if (UserIdTokenUtil.getUserId() == null) memoQueryWrapper.eq(Memo::getShowType, 1);
+        if (UserIdTokenUtil.getUserId() == null && memoListDTO.getShowType() == null) memoQueryWrapper.eq(Memo::getShowType, 1);
+
+        if (memoListDTO.getStart() != null && memoListDTO.getEnd() != null) memoQueryWrapper.between(Memo::getCreatedAt, memoListDTO.getStart(), memoListDTO.getEnd());
+
+        if (memoListDTO.getShowType() != null && (memoListDTO.getShowType() == 0 || memoListDTO.getShowType() == 1))   memoQueryWrapper.eq(Memo::getShowType, memoListDTO.getShowType());
+
+        if (StrUtil.isNotEmpty(memoListDTO.getContentContains()))   memoQueryWrapper.like(Memo::getContent, memoListDTO.getContentContains());
 
         page = memoMapper.selectPage(page, memoQueryWrapper);
 

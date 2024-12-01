@@ -1,5 +1,6 @@
 package com.mewhz.moments;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.signers.JWTSignerUtil;
@@ -55,6 +56,17 @@ public class Main {
                 .setHeader("typ", "JWT")
                 .setKey(key)
                 .sign();
+
+    }
+
+    @Test
+    public void dirTest() {
+
+        String filePath = "src/main/resources/upload/";
+
+        FileUtil.mkdir(filePath);
+
+        System.out.println("FileUtil.isDirectory(filePath) = " + FileUtil.isDirectory(filePath));
 
     }
 

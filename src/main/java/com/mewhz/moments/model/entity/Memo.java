@@ -8,13 +8,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+/**
+ * @author mewhz
+ */
 @TableName("memo")
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Memo {
-
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String content;
@@ -27,5 +29,4 @@ public class Memo {
     private Integer pinned;
     private Integer showType;
     private Integer isDelete;
-
 }

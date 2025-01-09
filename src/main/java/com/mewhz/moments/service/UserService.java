@@ -5,6 +5,9 @@ import com.mewhz.moments.model.entity.User;
 import com.mewhz.moments.model.dto.UserLoginDTO;
 import com.mewhz.moments.model.vo.UserVO;
 
+/**
+ * @author memhz
+ */
 public interface UserService extends IService<User> {
 
     UserLoginDTO login(String username, String password);

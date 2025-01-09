@@ -1,5 +1,8 @@
 package com.mewhz.moments.constant;
 
+/**
+ * @author mewhz
+ */
 public interface InterceptorsConstant {
 
     String[] EXCLUDED_PATHS = {

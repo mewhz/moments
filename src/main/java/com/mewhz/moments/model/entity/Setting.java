@@ -8,6 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+/**
+ * @author mewhz
+ */
 @TableName("setting")
 @Data
 @Accessors(chain = true)
@@ -15,7 +18,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 public class Setting {
 
-    @TableId( value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String adminUserName;
     private String favicon;
